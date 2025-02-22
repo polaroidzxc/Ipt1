@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instwibook</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #00d9ff;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .feed {
+            width: 100%;
+        }
+
+        .post {
+            background: #f8bd50b6;
+            border: 1px solid #dbdbdb;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .post img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .post p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .like-btn, .comment-section button {
+            background: none;
+            border: none;
+            color: #262626;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+        }
+
+        .like-btn.liked {
+            color: red;
+        }
+
+        .comment-section {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .upload-btn {
+            background: #0095f6;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Instwibook</h1>
+    </header>
+    
+    <div class="container">
+        <main class="feed">
+            <div class="post">
+                <h3>@Paul.Prz</h3>
+                <img src="post1.jpg" alt="Post Image">
+                <p>Beach mode on</p>
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fas fa-heart"></i> Like</button>
+                <div class="comment-section">
+                    <input type="text" class="comment-input" placeholder="Add a comment...">
+                    <button onclick="addComment(this)"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <ul class="comment-list"></ul>
+            </div>
+        </main>
+    </div>
+    <div class="container">
+        <main class="feed">
+            <div class="post">
+                <h3>@Erick.mncg</h3>
+                <img src="post2.jpg" alt="Post Image">
+                <p>Tamang bulag lang sa gedli</p>
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fas fa-heart"></i> Like</button>
+                <div class="comment-section">
+                    <input type="text" class="comment-input" placeholder="Add a comment...">
+                    <button onclick="addComment(this)"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <ul class="comment-list"></ul>
+            </div>
+        </main>
+    </div>
+    <div class="container">
+        <main class="feed">
+            <div class="post">
+                <h3>@RnrLaceda</h3>
+                <img src="post3.jpg" alt="Post Image">
+                <p>Kunwari nature trip bimbang naman gusto</p>
+                <button class="like-btn" onclick="toggleLike(this)"><i class="fas fa-heart"></i> Like</button>
+                <div class="comment-section">
+                    <input type="text" class="comment-input" placeholder="Add a comment...">
+                    <button onclick="addComment(this)"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <ul class="comment-list"></ul>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <input type="file" id="upload" hidden>
+        <label for="upload" class="upload-btn"><i class="fas fa-upload"></i> Upload Photo</label>
+    </footer>
+    
+    <script>
+        function toggleLike(button) {
+            button.classList.toggle("liked");
+            button.innerHTML = button.classList.contains("liked") 
+                ? '<i class="fas fa-heart"></i> Liked' 
+                : '<i class="fas fa-heart"></i> Like';
+        }
+
+        function addComment(button) {
+            const input = button.previousElementSibling;
+            const commentText = input.value.trim();
+            if (commentText !== "") {
+                const commentList = button.parentElement.nextElementSibling;
+                const newComment = document.createElement("li");
+                newComment.innerHTML = `<i class="fas fa-user-circle"></i> ${commentText}`;
+                commentList.appendChild(newComment);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
